@@ -1,0 +1,10 @@
+# OS / editor
+Thumbs.db
+.DS_Store
+*.swp
+.vscode/
+.idea/
+
+# Node (not used yet, but safe defaults)
+node_modules/
+npm-debug.log*
