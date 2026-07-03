@@ -204,14 +204,5 @@
       animation-timeline: view();
       animation-range: cover 0% cover 100%;
     }
-    @keyframes rise-in {
-      from { opacity: 0.2; transform: translateY(36px) perspective(900px) rotateX(6deg); }
-      to { opacity: 1; transform: none; }
-    }
-    .view-rise {
-      animation: rise-in var(--ease-out-soft) both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 85%;
-    }
   }
 }
