@@ -40,21 +40,25 @@ export default function WorldMap() {
   return (
     <div
       ref={ref}
-      className="map-shine-wrap mx-auto max-w-3xl rounded-sm"
+      className="relative mx-auto max-w-3xl"
       role="img"
       aria-label="World map indicating the EngX network across Africa, Europe, North America, and Australia"
     >
-      <Image
-        src="/world-map.png"
-        alt=""
-        width={800}
-        height={445}
-        className="h-auto w-full"
-        style={{
-          animation: live ? "map-fade-in 1.4s var(--ease-out-soft) both" : "none",
-          opacity: live ? undefined : 0,
-        }}
-      />
+      {/* Only the image + shine sweep are clipped; pins live outside this
+          layer so they never clip against the rounded edge as they drop/bob. */}
+      <div className="map-shine-wrap rounded-sm">
+        <Image
+          src="/world-map.png"
+          alt=""
+          width={800}
+          height={445}
+          className="h-auto w-full"
+          style={{
+            animation: live ? "map-fade-in 1.4s var(--ease-out-soft) both" : "none",
+            opacity: live ? undefined : 0,
+          }}
+        />
+      </div>
       {globalReach.markers.map((m, i) => (
         <span
           key={m.label}
