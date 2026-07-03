@@ -6,6 +6,7 @@ import HowWeWork from "@/components/HowWeWork";
 import SquadBuilder from "@/components/SquadBuilder";
 import Leadership from "@/components/Leadership";
 import Insights from "@/components/Insights";
+import GlobalReach from "@/components/GlobalReach";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -21,6 +22,7 @@ export default function Home() {
         <SquadBuilder />
         <Leadership />
         <Insights />
+        <GlobalReach />
         <Contact />
       </main>
       <Footer />

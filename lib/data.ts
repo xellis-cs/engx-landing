@@ -264,6 +264,76 @@ export const stats = [
   { value: "Global", label: "Network of partners and clients" },
 ] as const;
 
+/**
+ * Global-reach map markers. Coordinates are percentages of the
+ * public/world-map.png canvas (x from left, y from top), anchored at the pin
+ * tip — positions carried over from the original designer artwork. Labels are
+ * regions, not office claims (see docs/DOMAIN.md positioning rules).
+ */
+export type MapMarker = { x: number; y: number; label: string; hq?: boolean };
+
+export const globalReach = {
+  statement:
+    "Founded in South Africa. Delivering globally — one network, assembled wherever the work is.",
+  markers: [
+    { x: 54.0, y: 83.4, label: "South Africa — home base", hq: true },
+    { x: 52.5, y: 70.1, label: "Central Africa" },
+    { x: 56.9, y: 75.7, label: "Southern Africa" },
+    { x: 49.6, y: 36.4, label: "United Kingdom & Europe" },
+    { x: 25.2, y: 43.4, label: "North America — east" },
+    { x: 18.6, y: 47.9, label: "North America — west" },
+    { x: 88.9, y: 83.4, label: "Australia" },
+  ] satisfies MapMarker[],
+} as const;
+
+/**
+ * Copy for the Frameworks scroll narrative — the firm's method IP rendered
+ * as three visual scenes. Vocabulary per docs/DOMAIN.md: AIO, the continuous
+ * learning loop (whose six principles are `approachPrinciples`), and squads.
+ */
+export const frameworks = {
+  eyebrow: "The EngX Method",
+  title: "Frameworks engineered to",
+  titleEm: "compound",
+  intro:
+    "Method is what makes speed repeatable. Three frameworks run through every engagement — each one designed so today's delivery becomes tomorrow's capability.",
+  aio: {
+    kicker: "The destination",
+    title: "Adaptive Intelligent Organisations",
+    blurb:
+      "The end-state we build toward: an organisation that scales its data, its processes, and its people in concert — under governed autonomy, so speed never outruns control.",
+    canopy: "Governed autonomy",
+    planes: [
+      {
+        title: "People scaling",
+        blurb: "Teams and leaders equipped to work with intelligence, not around it.",
+      },
+      {
+        title: "Process scaling",
+        blurb: "Operations that adapt as fast as the market moves — mined, engineered, automated.",
+      },
+      {
+        title: "Data scaling",
+        blurb: "Signal the whole organisation can trust — governed, integrated, decision-ready.",
+      },
+    ],
+  },
+  loop: {
+    kicker: "The operating rhythm",
+    title: "The continuous learning loop",
+    blurb:
+      "Six principles, one rhythm. Every engagement runs the loop: read the client's reality, adapt on evidence, deliver collaboratively, and feed what was learned back into the portfolio.",
+  },
+  squad: {
+    kicker: "The delivery unit",
+    title: "Squads, assembled per engagement",
+    blurb:
+      "No bench, no pyramid. Senior specialists converge around your outcome, deliver, and transfer the capability before they leave.",
+    center: "Your outcome",
+    cta: "Build your squad",
+  },
+} as const;
+
 export const contactInterests = [
   "Strategy & Growth Planning",
   "Process Optimisation & Improvement",
