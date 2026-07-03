@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import XMark from "./icons/XMark";
 import { stats } from "@/lib/data";
 
 export default function Hero() {
@@ -16,16 +17,37 @@ export default function Hero() {
           </defs>
           <rect width="100%" height="100%" fill="url(#grid)" />
         </svg>
-        {/* Signature X sweep */}
-        <svg
-          className="absolute bottom-0 right-0 h-[70%] w-auto opacity-[0.10] max-lg:hidden"
-          viewBox="0 0 400 400"
-          fill="none"
-          aria-hidden
-        >
-          <path d="M20 380 Q 200 240 380 20" stroke="#b03346" strokeWidth="26" strokeLinecap="round" />
-          <path d="M60 40 Q 210 210 350 370" stroke="#f7f3ee" strokeWidth="26" strokeLinecap="round" />
-        </svg>
+        {/* Signature reveal: the X sweep draws itself in, then the traced
+            mark settles at the crossing. Drifts slower than the copy on
+            scroll where scroll timelines are supported. */}
+        <div className="parallax-drift absolute bottom-0 right-0 h-[70%] max-lg:hidden">
+          <svg
+            className="h-full w-auto opacity-[0.10]"
+            viewBox="0 0 400 400"
+            fill="none"
+            aria-hidden
+          >
+            <path
+              d="M20 380 Q 200 240 380 20"
+              stroke="#b03346"
+              strokeWidth="26"
+              strokeLinecap="round"
+              pathLength={1}
+              strokeDasharray={1}
+              style={{ animation: "x-draw 1.1s var(--ease-out-soft) 0.2s both" }}
+            />
+            <path
+              d="M60 40 Q 210 210 350 370"
+              stroke="#f7f3ee"
+              strokeWidth="26"
+              strokeLinecap="round"
+              pathLength={1}
+              strokeDasharray={1}
+              style={{ animation: "x-draw 1.1s var(--ease-out-soft) 0.55s both" }}
+            />
+          </svg>
+          <XMark className="absolute left-1/2 top-1/2 h-44 w-44 -translate-x-1/2 -translate-y-1/2 text-crimson-bright/25 [animation:x-settle_0.9s_var(--ease-out-soft)_1.35s_both]" />
+        </div>
       </div>
 
       <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-32 sm:px-8 sm:pb-20 sm:pt-40 lg:pt-44">
