@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+/* ============================================================
+   EngX design tokens — see docs/BRAND.md before changing.
+   Palette is derived from the EngX logo (navy / crimson / cream).
+   ============================================================ */
+@theme {
+  /* Brand core */
+  --color-navy: #1a2540;
+  --color-navy-deep: #101a30;
+  --color-navy-night: #0b1222;
+  --color-navy-soft: #24345c;
+  --color-crimson: #9a2939;
+  --color-crimson-bright: #b03346;
+  --color-crimson-deep: #6e2a35;
+
+  /* Ground */
+  --color-cream: #f7f3ee;
+  --color-cream-light: #fbf8f3;
+  --color-sand: #eae2d6;
+  --color-ink: #1f1f1d;
+
+  /* Support */
+  --color-tan: #b09372;
+  --color-gold: #c9a86a;
+  --color-slate-mist: #8b97ad;
+  --color-body: #4c4a45;
+
+  /* Type */
+  --font-sans: var(--font-source-sans), -apple-system, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Fluid display typography */
+.text-display {
+  font-size: clamp(2.4rem, 1.2rem + 4.6vw, 4.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+}
+.text-headline {
+  font-size: clamp(1.75rem, 1.15rem + 2.2vw, 2.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+.text-title {
+  font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.65rem);
+  line-height: 1.25;
+}
+
+/* Section rhythm */
+.section-pad {
+  padding-block: clamp(4rem, 2.5rem + 5vw, 7.5rem);
+}
+
+/* Eyebrow label */
+.eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* Hairline rule used between editorial items */
+.rule-top {
+  border-top: 1px solid rgb(26 37 64 / 0.14);
+}
+
+/* Scroll reveal (driven by components/Reveal.tsx) */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(22px);
+}
+.reveal-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.7s var(--ease-out-soft),
+    transform 0.7s var(--ease-out-soft);
+}
+
+::selection {
+  background: var(--color-tan);
+  color: var(--color-navy-night);
+}
