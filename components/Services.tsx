@@ -3,6 +3,7 @@
 import { useState } from "react";
 import SectionHeading from "./SectionHeading";
 import Reveal from "./Reveal";
+import XMark from "./icons/XMark";
 import { serviceLines } from "@/lib/data";
 
 function CapabilityList({ id }: { id: string }) {
@@ -73,15 +74,20 @@ export default function Services() {
             })}
           </div>
 
-          <div className="rounded-sm border border-navy/10 bg-white px-9 py-9">
-            <p className="eyebrow mb-2 text-tan">Service line {activeSvc.num}</p>
-            <h3 className="text-title font-serif font-semibold text-navy">
-              {activeSvc.title}
-            </h3>
-            <p className="mb-8 mt-3 max-w-xl text-[15px] leading-relaxed text-body">
-              {activeSvc.summary}
-            </p>
-            <CapabilityList id={activeSvc.id} />
+          <div className="relative overflow-hidden rounded-sm border border-navy/10 bg-white px-9 py-9">
+            {/* Signature motif, threaded quietly behind the content */}
+            <XMark className="pointer-events-none absolute -bottom-14 -right-10 h-64 w-64 text-navy/[0.04]" />
+            {/* key re-mounts the panel so svc-fade runs on every tab switch */}
+            <div key={activeSvc.id} className="svc-fade relative">
+              <p className="eyebrow mb-2 text-tan">Service line {activeSvc.num}</p>
+              <h3 className="text-title font-serif font-semibold text-navy">
+                {activeSvc.title}
+              </h3>
+              <p className="mb-8 mt-3 max-w-xl text-[15px] leading-relaxed text-body">
+                {activeSvc.summary}
+              </p>
+              <CapabilityList id={activeSvc.id} />
+            </div>
           </div>
         </Reveal>
 
@@ -117,7 +123,7 @@ export default function Services() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="pb-7 pl-9 pr-1">
+                    <div className={`pb-7 pl-9 pr-1 ${isOpen ? "svc-fade" : ""}`}>
                       <p className="mb-5 text-[14px] italic leading-relaxed text-body">
                         {s.summary}
                       </p>
