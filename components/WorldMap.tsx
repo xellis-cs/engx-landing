@@ -79,11 +79,13 @@ export default function WorldMap() {
               opacity: live ? undefined : 0,
             }}
           />
-          {/* teardrop pin, anchored at its tip */}
+          {/* teardrop pin, anchored at its tip. overflow-visible so the bob
+              animation (inner <g> shifts up 3px) isn't clipped by the SVG's
+              own viewport — the path fills the viewBox to the top edge. */}
           <svg
             viewBox="0 0 24 32"
             aria-hidden
-            className={`absolute left-0 top-0 h-7 w-auto drop-shadow-[0_3px_6px_rgba(26,37,64,0.35)] sm:h-8 ${
+            className={`absolute left-0 top-0 h-7 w-auto overflow-visible drop-shadow-[0_3px_6px_rgba(26,37,64,0.35)] sm:h-8 ${
               m.hq ? "text-navy" : "text-crimson"
             }`}
             style={{
