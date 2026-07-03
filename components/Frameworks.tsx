@@ -435,7 +435,7 @@ function SquadScene() {
           href="#squad"
           className="mt-8 inline-block rounded-sm bg-crimson px-7 py-3.5 text-[14px] font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-crimson-bright hover:shadow-[0_10px_28px_rgba(154,41,57,0.45)]"
         >
-          {squad.cta} &rarr;
+          {squad.cta}&nbsp;&rarr;
         </a>
       </div>
 

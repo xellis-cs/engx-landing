@@ -70,8 +70,8 @@ export default function ChatFab() {
               className="rounded-sm bg-navy px-3.5 py-3 text-[13px] leading-relaxed text-cream/85"
               style={{ animation: "msg-in 0.5s var(--ease-out-soft) 0.15s both" }}
             >
-              Goeie dag. I&apos;m {site.assistant} — I&apos;ll be answering
-              questions about EngX here soon. Until then, a partner will
+              Goeie dag. I&apos;m {site.assistant}. I&apos;ll be answering
+              questions about EngX here soon — until then, a partner will
               gladly take yours directly.
             </p>
             <a
