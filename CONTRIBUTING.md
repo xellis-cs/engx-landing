@@ -10,7 +10,9 @@ through a reviewed pull request — direct pushes to `main` are blocked.
    git checkout main && git pull
    git checkout -b my-change
    ```
-2. **Make your edits.** The site is a single static page — `index.html` at the repo root.
+2. **Make your edits.** The site is a Next.js app — content in `lib/data.ts`,
+   sections in `components/`, design tokens in `app/globals.css`. Run
+   `npm run dev` locally and check 390px / 768px / 1440px widths.
 3. **Push and open a pull request** against `main`:
    ```bash
    git push -u origin my-change
@@ -26,5 +28,5 @@ through a reviewed pull request — direct pushes to `main` are blocked.
 
 - Up to **3** staging environments can exist at once (Free tier) — close stale PRs.
 - Production URL: https://purple-bush-0f28be003.7.azurestaticapps.net
-- Keep `index.html` as the entry point; `staticwebapp.config.json` controls routing
-  and security headers.
+- The CI build runs `npm run build` (static export to `/out`);
+  `staticwebapp.config.json` controls routing and security headers.

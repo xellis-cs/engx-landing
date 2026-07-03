@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+/* ============================================================
+   EngX design tokens — see docs/BRAND.md before changing.
+   Palette is derived from the EngX logo (navy / crimson / cream).
+   ============================================================ */
+@theme {
+  /* Brand core */
+  --color-navy: #1a2540;
+  --color-navy-deep: #101a30;
+  --color-navy-night: #0b1222;
+  --color-navy-soft: #24345c;
+  --color-crimson: #9a2939;
+  --color-crimson-bright: #b03346;
+  --color-crimson-deep: #6e2a35;
+
+  /* Ground */
+  --color-cream: #f7f3ee;
+  --color-cream-light: #fbf8f3;
+  --color-sand: #eae2d6;
+  --color-ink: #1f1f1d;
+
+  /* Support */
+  --color-tan: #b09372;
+  --color-gold: #c9a86a;
+  --color-slate-mist: #8b97ad;
+  --color-body: #4c4a45;
+
+  /* Type */
+  --font-sans: var(--font-source-sans), -apple-system, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Fluid display typography */
+.text-display {
+  font-size: clamp(2.4rem, 1.2rem + 4.6vw, 4.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+}
+.text-headline {
+  font-size: clamp(1.75rem, 1.15rem + 2.2vw, 2.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+.text-title {
+  font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.65rem);
+  line-height: 1.25;
+}
+
+/* Section rhythm */
+.section-pad {
+  padding-block: clamp(4rem, 2.5rem + 5vw, 7.5rem);
+}
+
+/* Eyebrow label */
+.eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* Hairline rule used between editorial items */
+.rule-top {
+  border-top: 1px solid rgb(26 37 64 / 0.14);
+}
+
+/* Scroll reveal (driven by components/Reveal.tsx) */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(22px);
+}
+.reveal-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.7s var(--ease-out-soft),
+    transform 0.7s var(--ease-out-soft);
+}
+
+::selection {
+  background: var(--color-tan);
+  color: var(--color-navy-night);
+}
+
+/* ============================================================
+   Motion vocabulary — keyframes ported from the legacy site
+   (index.html on main), adapted to transform/opacity only.
+   All end states are the visible resting state, so `both`
+   fills degrade correctly under prefers-reduced-motion.
+   ============================================================ */
+
+/* Service detail panel swap */
+@keyframes svc-fade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.svc-fade { animation: svc-fade 0.5s var(--ease-out-soft); }
+
+/* World map entrance + periodic light sweep */
+@keyframes map-fade-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes map-shine {
+  0%, 12% { transform: translateX(-100%); }
+  38%, 100% { transform: translateX(400%); }
+}
+.map-shine-wrap { position: relative; overflow: hidden; }
+.map-shine-wrap::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 30%;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgb(255 255 255 / 0.35) 50%,
+    transparent 70%
+  );
+  animation: map-shine 6s ease-in-out 1.5s infinite;
+  pointer-events: none;
+}
+
+/* Map pins: drop in, then idle bob; halo ring pulses outward */
+@keyframes pin-drop {
+  from { opacity: 0; transform: translate(-50%, -100%) translateY(-14px) scale(0.6); }
+  to { opacity: 1; transform: translate(-50%, -100%); }
+}
+@keyframes pin-bob {
+  0%, 100% { transform: none; }
+  50% { transform: translateY(-3px); }
+}
+@keyframes pin-pulse {
+  0%, 100% { opacity: 0.35; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0; transform: translate(-50%, -50%) scale(2.6); }
+}
+
+/* Learning-loop ring: comet orbits the r=170 circle (2πr ≈ 1068) */
+@keyframes orbit {
+  to { stroke-dashoffset: -1068; }
+}
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.4); }
+}
+@keyframes clients-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+/* Assistant FAB: rise on load, presence-dot pulse, message entrance */
+@keyframes fab-rise {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes msg-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pdot {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(95 217 138 / 0.5); }
+  50% { box-shadow: 0 0 0 5px rgb(95 217 138 / 0); }
+}
+
+/* Hero signature: the X sweep strokes draw themselves, then the
+   traced mark settles in. pathLength=1 on the SVG paths. */
+@keyframes x-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes x-settle {
+  from { opacity: 0; transform: scale(0.9) rotate(-4deg); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ============================================================
+   Scroll-driven depth (progressive enhancement). Only engages
+   where the browser supports scroll timelines AND the user has
+   not asked for reduced motion — otherwise elements simply sit
+   at their resting state.
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    @keyframes drift-up {
+      from { transform: translateY(48px); }
+      to { transform: translateY(-48px); }
+    }
+    .parallax-drift {
+      animation: drift-up linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
